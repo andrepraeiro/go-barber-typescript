@@ -4,6 +4,8 @@ import AppointmentsRepository from '@modules/appointments/infra/typeorm/reposito
 import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 
+require('reflect-metadata');
+
 container.registerSingleton<IAppointmentsRepository>(
   'AppointmentsRepository',
   AppointmentsRepository
