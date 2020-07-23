@@ -7,7 +7,6 @@ export default class BCryptHashProvider implements IHashProvider {
   }
 
   public async compareHash(payload: string, hashed: string): Promise<boolean> {
-    console.log();
     return compare(payload, hashed);
   }
 }
