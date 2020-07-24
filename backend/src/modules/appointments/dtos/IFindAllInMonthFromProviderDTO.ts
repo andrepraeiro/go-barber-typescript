@@ -1,6 +1,4 @@
-import ListProviderMonthAvailabilityService from '../services/ListProviderMonthAvailabilityService';
-
-export default interface ICreateAppointmentDTO {
+export default interface IFindAllInMonthFromProviderDTO {
   provider_id: string;
   month: number;
   year: number;

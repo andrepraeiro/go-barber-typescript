@@ -1,4 +1,7 @@
+import 'reflect-metadata';
 import { injectable, inject } from 'tsyringe';
+
+import { getDaysInMonth, getDate } from 'date-fns';
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 
 interface IRequest {
@@ -24,14 +27,30 @@ export default class ListProviderMonthAvailabilityService {
     month,
     year,
   }: IRequest): Promise<IResponse> {
-    const appointments = await this.appointmentsRepository.FindAllInMonthFromProvider(
+    const appointments = await this.appointmentsRepository.findAllInMonthFromProvider(
       { provider_id, year, month }
     );
-    return [
-      {
-        day: 1,
-        available: false,
-      },
-    ];
+
+    const numberDaysInMonth = getDaysInMonth(new Date(year, month - 1));
+    const eachDayArray = Array.from(
+      { length: numberDaysInMonth },
+      (_, index) => index + 1
+    );
+
+    const avalability = eachDayArray.map((day) => {
+      const appointmentsInDay = appointments.filter((appointment) => {
+        return getDate(appointment.date) === day;
+      });
+
+      // const r = { day, appointmentsCount: appointmentsInDay.length };
+      // console.log(r);
+
+      return {
+        day,
+        available: appointmentsInDay.length < 10,
+      };
+    });
+
+    return avalability;
   }
 }
