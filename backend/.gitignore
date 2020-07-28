@@ -2,8 +2,9 @@ node_modules
 dist
 .DS_Store
 temp/
-
+.env
 tmp/*
 !tmp/.gitkeep
 
 coverage/
+ormconfig.json
