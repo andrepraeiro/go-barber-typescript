@@ -22,6 +22,7 @@ describe('CreateUser', () => {
     );
 
     createUser = new CreateUserService(fakeUsersRepository, fakeHashProvider);
+    process.env.APP_SECRET = 'app-secret';
   });
   it('should be able to authenticate a user with correct credentials', async () => {
     const user = await createUser.execute({
