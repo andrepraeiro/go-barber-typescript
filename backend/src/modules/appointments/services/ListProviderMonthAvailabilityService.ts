@@ -42,9 +42,6 @@ export default class ListProviderMonthAvailabilityService {
         return getDate(appointment.date) === day;
       });
 
-      // const r = { day, appointmentsCount: appointmentsInDay.length };
-      // console.log(r);
-
       return {
         day,
         available: appointmentsInDay.length < 10,
